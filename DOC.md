@@ -6,7 +6,7 @@ Dockerfile : operational system requirements
 requirements.dev.txt : libs to dev use 
 requirements.txt : libs to app use 
 
-App
+Appc
 
 // app
 
