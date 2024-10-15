@@ -1,4 +1,4 @@
-A real Recipe App that allows clients to log in using token-based authentication to manage their recipes with images, tags, ingredients, and much more. It does not include a front-end (although I may create one in the future); it is focused on developing, documenting, and maintaining scalable and secure RESTful APIs, built using Django and PostgreSQL. The project uses Docker to facilitate containerization and deployment, and Django REST Framework (DRF) to create a robust RESTful API for recipe management.
+A teaching plataform that allows clients to log in using token-based authentication to manage their lessons with titles, contents and much more. it is focused on developing, documenting, and maintaining scalable and secure RESTful APIs, built using Django and PostgreSQL. The project uses Docker to facilitate containerization and deployment, and Django REST Framework (DRF) to create a robust RESTful API for recipe management.
 
 Features:
 
