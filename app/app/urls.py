@@ -29,7 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),  # Rota para a interface de administração
     path('', index, name='index'),  # Página inicial
     path('register/', register, name='register'),  # Rota para o registro
-    path('user_login/', user_login, name='login'),  # Rota para o login
+    path('user_login/', user_login, name='user_login'),  # Rota para o login
     path('home/', home, name='home'),  # Rota para a home
     path('api/licao/', include('licao.urls')),  # Incluindo URLs do app 'licao'
     path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),  # API Schema

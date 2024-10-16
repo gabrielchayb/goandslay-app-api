@@ -42,7 +42,7 @@ def user_login(request):  # Renomeie a função para evitar conflito
     else:
         form = UserLoginForm()  # Cria uma nova instância do formulário
     
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'user_login.html', {'form': form})
 
 
 @login_required  # Garantir que o usuário esteja autenticado
