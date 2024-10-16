@@ -1,44 +1,51 @@
-github // workflows
-- checks.yml : Login to Docker Hub, commands to test and lint the app, github actions
+This page is a resume to all the app structure
 
-docker-compose.yml : commands, environment, ports, etc 
-Dockerfile : operational system requirements 
-requirements.dev.txt : libs to dev use 
-requirements.txt : libs to app use 
+GitHub // Workflows
 
-Appc
+	•	checks.yml: Logs in to Docker Hub, runs commands to test and lint the app using GitHub Actions.
+	•	docker-compose.yml: Contains commands, environment variables, ports, etc.
+	•	Dockerfile: Specifies the operational system requirements.
+	•	requirements.dev.txt: Lists libraries used for development.
+	•	requirements.txt: Lists libraries used by the application in production.
+
+App Structure
 
 // app
 
-- settings.py 
-- tests.py: arquivo do testes  
+	•	settings.py: Contains all the application configurations.
+	•	tests.py: File for unit and integration tests.
 
-// core 
-- // management - wait_for_db:
-- // migrations: - toda vez que migramos um banco de dados Quando executamos o comando makemigrations, o Django cria o banco de dados e as migrations, mas não as executa, isto é: não realmente aplica as alterações no banco de dados.
-Para que o Django as aplique, são necessárias três coisas, basicamente:
-1. Que a configuração da interface com o banco de dados esteja descrita no arquivo de configurações settings.py.
-2. Que os modelos e migrations estejam definidos para esse projeto.
-3. Execução do comando migrate.
+// core
 
-- models.py Cada classe dentro de models.py é uma representação de uma tabela no banco de dados, e os atributos dessas classes são mapeados para colunas da tabela.
+	•	management - wait_for_db: Since there is a timing discrepancy between Docker Compose and PostgreSQL, we add a “test” that waits for PostgreSQL to be ready before Docker Compose builds the application.
+	•	migrations: Every time we migrate a database, running the makemigrations command creates database migrations in Django, but it doesn’t apply the changes. To apply the changes, three steps are needed:
+	1.	Ensure the database interface is configured in settings.py.
+	2.	Make sure models and migrations are defined for the project.
+	3.	Run the migrate command to apply the migrations.
+	•	models.py: Each class in models.py represents a database table, and the class attributes map to the columns in that table.
 
-// recipe 
+// licao (lesson)
 
-- serialyzers.py: o propósito dele seria converter os dados dos modelos relacionados a receitas em formatos adequados para envio e recebimento via API. 
-	1.	Conversão de Dados:
-O serializer transforma dados dos modelos em JSON ou outros formatos para serem consumidos por APIs, além de transformar dados recebidos em objetos Python utilizáveis.
-	2.	Validação de Dados:
-Ele também permite definir validações personalizadas para garantir que os dados recebidos estejam no formato correto antes de serem salvos no banco de dados.
-	3.	Estrutura Básica de um Serializer:
-Um serializer geralmente é uma classe que herda de serializers.ModelSerializer ou serializers.Serializer, e define quais campos de um modelo ou dados personalizados serão serializados.
+	•	serializers.py: The purpose of this file is to convert the lesson-related model data into formats suitable for API requests and responses.
+	1.	Data Conversion: The serializer transforms model data into JSON or other formats to be consumed by APIs, and it converts received data into usable Python objects.
+	2.	Data Validation: It allows custom validations to ensure the received data is in the correct format before saving it to the database.
+	3.	Basic Structure of a Serializer: A serializer is usually a class that inherits from serializers.ModelSerializer or serializers.Serializer, defining which fields of a model or custom data will be serialized.
+	•	views.py: Handles HTTP requests and returns the appropriate responses. It defines the logic that happens when a client (usually a browser or an API) makes a request to a specific URL in the application. It contains the functions or classes that handle the lesson-related requests.
 
-- views.py o arquivo views.py é responsável por lidar com as requisições HTTP e retornar as respostas adequadas. Ele define a lógica que acontece quando um cliente (geralmente um navegador ou uma API) faz uma requisição a uma determinada URL da aplicação.ele contém as funções ou classes que tratam as requisições relacionadas às receitas.
+// user
 
-// user 
+	•	Follows the same logic as the lesson module.
 
-- mesma logica do recipe
+// manage.py
 
-// manage.py é o arquivo que executa toda nossa aplicação, através dos comandos que definimos com o docker-compose
+	•	This file runs the entire application, executed through the commands defined with docker-compose.
 
-// .dockerignore ignora o venv e outras coisas do tipo.
+// .dockerignore
+
+	•	Ignores the venv and other unnecessary files or directories.
+
+Admin Access
+
+	•	Admin Login URL: http://127.0.0.1:8000/admin/login/?next=/admin/
+	•	Login: admin@gmail.com
+	•	Password: sssss
