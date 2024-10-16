@@ -33,6 +33,11 @@ class UserSerializer(serializers.ModelSerializer):
 
         return user
     
+    def delete(self, instance):
+        """Delete the user."""
+        instance.delete()
+        return instance
+    
 class AuthTokenSerializer(serializers.Serializer):
     """Serializer for the user auth token."""
     email = serializers.EmailField()
