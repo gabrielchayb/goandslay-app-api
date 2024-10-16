@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularSwaggerView,
@@ -22,19 +23,19 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from . import views
+from .views import index, register  # Importando as views que você precisa
 
 urlpatterns = [
-    
-    path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('register/', views.register, name='register'),  # Atualizado para chamar a view
-    path('api/licao/', include('licao.urls')),
-    path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),
-    path('api/docs/', SpectacularSwaggerView.as_view(url_name='api-schema'), name='api-docs'),
-    path('api/user/', include('user.urls')),
+    path('admin/', admin.site.urls),  # Rota para a interface de administração
+    path('', index, name='index'),  # Página inicial
+    path('register/', register, name='register'),  # Rota para o registro
+    path('api/licao/', include('licao.urls')),  # Incluindo URLs do app 'licao'
+    path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),  # API Schema
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='api-schema'), name='api-docs'),  # Swagger Docs
+    path('api/user/', include('user.urls')),  # Incluindo URLs do app 'user'
 ]
 
+# Serve arquivos de mídia durante o desenvolvimento
 if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL,
