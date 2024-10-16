@@ -9,6 +9,10 @@ from rest_framework import status
 from django.shortcuts import render
 from rest_framework.permissions import AllowAny
 from django.contrib.auth import login
+from django.contrib import messages
+from django.shortcuts import redirect
+from django.urls import reverse
+from django.views import View
 
 
 
@@ -19,9 +23,28 @@ from user.serializers import (
 )
 
 
-class CreateUserView(generics.CreateAPIView):
-    """Create a new user in the system."""
-    serializer_class = UserSerializer
+class CreateUserView(View):
+    """View para criar um novo usuário."""
+
+    def get(self, request):
+        form = UserSerializer()
+        return render(request, 'register.html', {'form': form})
+
+    def post(self, request):
+        # Criar uma instância do serializer com os dados do request.POST
+        serializer = UserSerializer(data=request.POST)
+        
+        # Validar os dados recebidos
+        if serializer.is_valid():
+            # Salvar os dados do novo usuário
+            serializer.save()
+
+            # Redirecionar o usuário autenticado para a página home
+            return render(request, 'home.html', {'user': serializer.instance})
+
+        # Se os dados não forem válidos, renderizar o formulário novamente com erros
+        return render(request, 'register.html', {'form': serializer, 'errors': serializer.errors})
+
 
 class LoginUserView(generics.GenericAPIView):
     """View for user login."""
