@@ -19,3 +19,7 @@ class LicaoViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         """Retrieve recipes for authenticated user."""
         return self.queryset.filter(user=self.request.user).order_by('-id')
+
+    def perform_create(self, serializer):
+        """Create a new Licao instance with the authenticated user."""
+        serializer.save(user=self.request.user)
