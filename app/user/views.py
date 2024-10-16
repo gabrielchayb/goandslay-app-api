@@ -6,6 +6,9 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 from rest_framework.response import Response
 from rest_framework import status
+from django.shortcuts import render
+
+
 
 from user.serializers import (
     UserSerializer,
@@ -32,7 +35,7 @@ class ManageUserView(generics.RetrieveUpdateAPIView):
         """Retrieve and return the authenticated user."""
         return self.request.user
     
-    def delete(self, request):
+    def delete(self, request, *args, **kwargs):
         """Delete the authenticated user."""
         user = request.user
         user.delete()
