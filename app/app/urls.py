@@ -27,7 +27,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('api/recipe/', include('recipe.urls')),
+    path('api/licao/', include('licao.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),
     path(
         'api/docs/',
