@@ -7,18 +7,39 @@ from rest_framework.settings import api_settings
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import render
+from rest_framework.permissions import AllowAny
+from django.contrib.auth import login
 
 
 
 from user.serializers import (
     UserSerializer,
     AuthTokenSerializer,
+    LoginUserSerializer
 )
 
 
 class CreateUserView(generics.CreateAPIView):
     """Create a new user in the system."""
     serializer_class = UserSerializer
+
+class LoginUserView(generics.GenericAPIView):
+    """View for user login."""
+    serializer_class = LoginUserSerializer
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        """Handle user login."""
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        user = serializer.validated_data['user']
+        
+        # Log the user in
+        login(request, user)
+
+        # Redirecionar para a página home após o login
+        return Response({'detail': 'Login successful', 'redirect_url': '/home/'})
 
 class CreateTokenView(ObtainAuthToken):
     """Create a new auth token for user."""
