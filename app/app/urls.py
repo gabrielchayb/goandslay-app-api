@@ -23,12 +23,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from .views import index, register  # Importando as views que você precisa
+from .views import index, register , user_login , home  # Importando as views que você precisa
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # Rota para a interface de administração
     path('', index, name='index'),  # Página inicial
     path('register/', register, name='register'),  # Rota para o registro
+    path('user_login/', user_login, name='login'),  # Rota para o login
+    path('home/', home, name='home'),  # Rota para a home
     path('api/licao/', include('licao.urls')),  # Incluindo URLs do app 'licao'
     path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),  # API Schema
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='api-schema'), name='api-docs'),  # Swagger Docs

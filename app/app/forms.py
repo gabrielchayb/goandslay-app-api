@@ -1,5 +1,6 @@
 from django import forms
 from core.models import User
+from django.contrib.auth import authenticate
 
 class UserRegistrationForm(forms.ModelForm):
     class Meta:
@@ -15,3 +16,11 @@ class UserRegistrationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+    
+
+
+class UserLoginForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput()) 
+
+    
