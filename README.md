@@ -25,3 +25,12 @@ Instalação:
 	3.	Suba seu servidor com: docker-compose up (ele ja vai instalar tudo pois foi configurado no Dockerfile, fique tranquilo)
  	4.	Consulte e teste a documentação das APIs em: http://127.0.0.1:8000/api/docs/
   	5.      Não se esqueça de autenticar seu user: em apis user, /api/user/token/ , faça login, copie e cole o token gerado, e em cima da page, clique em "Authorize", clique em tokenAuth, e digite no campo, desse jeito: Token xxxxxxxxxxxxxxxxxxxxx 
+
+COMANDOS PARA RODAR DOCKER
+
+docker-compose run --rm app sh -c "python manage.py runserver" 
+docker-compose run --rm app sh -c "python manage.py makemigrations"
+docker-compose run --rm app sh -c "python manage.py migrate"
+docker-compose run --rm app sh -c "python manage.py startapp licao"
+docker-compose up
+docker-compose down 

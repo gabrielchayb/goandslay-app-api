@@ -27,10 +27,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('register/', views.register, name='register'),
-    path('login/', views.login, name='login'),
-    path('home/', views.home, name='home'),
-    path('user_info/', views.user_info, name='user_info'),
+    path('api/recipe/', include('recipe.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),
     path(
         'api/docs/',
