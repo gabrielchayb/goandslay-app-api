@@ -20,6 +20,8 @@ class UserManager(BaseUserManager):
             raise ValueError('User must have an email address.')
         user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
+        if 'birth_date' in extra_fields:
+            user.birth_date = extra_fields['birth_date']
         user.save(using=self._db)
 
         return user
@@ -38,6 +40,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     """User in the system."""
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
+    birth_date = models.DateField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
