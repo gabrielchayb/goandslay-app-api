@@ -1,11 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <title>Home Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+    <title>Go and Slay</title>
+    <link rel="icon" href="static/imgs/logo.jpeg" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+        body {
+            font-family: 'Orbitron', sans-serif;
+            font-optical-sizing: auto;
+            font-style: bold;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: rgb(15,13,13);
+            background: linear-gradient(180deg, rgba(15,13,13,1) 0%, rgba(26,26,26,1) 52%, rgba(0,0,0,1) 63%);
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 60%;
+            width: 600px;
+            margin: 0 auto;
+        }
+
+        #text {
+            font-size: 1.5em;
+            font-family: 'Orbitron', sans-serif;
+            font-optical-sizing: auto;
+            font-style: bold;
+            line-height: 2;
+            
+        }
+
+        .image-buttons {
+            display: inline-block;  /* Faz o link se comportar como um bloco */
+            text-align: center;     /* Centraliza o texto dentro do link */
+            margin: 1em;            /* Espaçamento externo ao redor do botão */
+}
+
+        .btn {
+            background-color: #ffab04;  /* Cor de fundo do botão */
+            color: #fff;                /* Cor do texto */
+            padding: 12px 24px;        /* Preenchimento interno do botão */
+            border: none;               /* Sem borda */
+            border-radius: 5px;        /* Bordas arredondadas */
+            font-size: 1em;            /* Tamanho da fonte */
+            font-family: 'Orbitron', sans-serif; /* Fonte personalizada */
+            cursor: pointer;           /* Cursor de mão ao passar o mouse */
+            transition: background-color 0.3s ease; /* Transição suave para a cor de fundo */
+        }
+
+        .btn:hover {
+            background-color: green;  /* Cor de fundo ao passar o mouse */
+        }
+
+        @media (max-width: 600px) {
+            .btn {
+                padding: 10px 20px;     /* Ajuste do preenchimento em telas menores */
+                font-size: 0.9em;        /* Tamanho da fonte reduzido */
+            }
+        }
+
+         /* Definindo a animação fade-in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Classe para a imagem com a animação */
+        .fade-in-image {
+            opacity: 0;
+            animation: fadeIn 2s forwards; /* Animação dura 2 segundos */
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Welcome!</h1>
-    <button onclick="window.location.href='api/docs'">Register</button>
+
+    <div class="container">
+        <div id="text" style="text-align: center;"></div>
+    </div>
     
+    <a href="{% url 'register' %}" class="image-buttons">
+        <button class="btn btn-primary">Cadastre-se Agora</button>
+    </a>
+
+    <script>
+        var text = document.getElementById('text')
+        var TypeWriter = new Typewriter(text, {
+            loop: false,
+            delay: 50,
+            cursor: '<span style="color: #ffab04;">|</span>'
+        });
+    
+        TypeWriter
+            .pauseFor(500)
+            .typeString('Welcome! Comunique-se em Inglês Profissionalmente <span style="color:#ffab04;">Para você ir e arrasar!</span>')
+            .pauseFor(500)
+            .deleteChars(23)
+            .pauseFor(400)  
+            .typeString('<br>Junte-se a Go And Slay para uma jornada imersiva para <br><span style="color:#ffab04;">falar em pé de igualdade com o mundo. Aprenda de forma fácil e simples, agora!</span>.')
+            .typeString('<br>Clique no botão abaixo e faça seu registro agora!')
+            .start()
+    </script>    
+
 </body>
 </html>

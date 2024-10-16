@@ -25,15 +25,13 @@ from django.conf import settings
 from . import views
 
 urlpatterns = [
+    
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
+    path('register/', views.register, name='register'),  # Atualizado para chamar a view
     path('api/licao/', include('licao.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),
-    path(
-        'api/docs/',
-        SpectacularSwaggerView.as_view(url_name='api-schema'),
-        name='api-docs',
-        ),
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='api-schema'), name='api-docs'),
     path('api/user/', include('user.urls')),
 ]
 
