@@ -8,6 +8,8 @@ from django.contrib.auth import (
 from django.utils.translation import gettext as _
 
 from rest_framework import serializers
+from rest_framework.authentication import TokenAuthentication
+
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -37,24 +39,7 @@ class UserSerializer(serializers.ModelSerializer):
         """Delete the user."""
         instance.delete()
         return instance
-    
-class LoginUserSerializer(serializers.ModelSerializer):
-    """Serializer for user login."""
 
-    email = serializers.EmailField()
-    password = serializers.CharField(write_only=True)
-
-    class Meta:
-        model = get_user_model()
-        fields = ['email', 'password']
-
-    def validate(self, attrs):
-        """Validate the user's credentials."""
-        user = authenticate(username=attrs['email'], password=attrs['password'])
-        if user is None:
-            raise serializers.ValidationError(_('Unable to authenticate with provided credentials.'))
-        attrs['user'] = user
-        return attrs
     
 class AuthTokenSerializer(serializers.Serializer):
     """Serializer for the user auth token."""
