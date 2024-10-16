@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout as auth_logout
 
 def index(request):
     return render(request, 'index.html')
@@ -49,3 +50,6 @@ def user_login(request):  # Renomeie a função para evitar conflito
 def home(request):
     user = request.user  # Obtém o usuário logado
     return render(request, 'home.html', {'user': user})  # Passa o usuário para o template
+
+def logout(request):
+    logout(request)  # Usa a função de logout correta
