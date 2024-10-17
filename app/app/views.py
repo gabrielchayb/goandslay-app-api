@@ -1,13 +1,15 @@
 from core.models import User
 from django.shortcuts import render
 from core.models import User
-from .forms import UserRegistrationForm , UserLoginForm , UserEditForm
+from .forms import UserRegistrationForm , UserLoginForm , UserEditForm , LicaoForm
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout 
 from django.http import HttpResponseRedirect
+from core.models import Licao
+from django.shortcuts import get_object_or_404
 
 def index(request):
     return render(request, 'index.html')
@@ -84,13 +86,23 @@ def deletarperfil(request):
 
 @login_required
 def cadastrarlicao(request):
-    user = request.user
-    return render(request, 'cadastrarlicao.html', {'user': user})
+    if request.method == 'POST':
+        form = LicaoForm(request.POST)
+        if form.is_valid():
+            licao = form.save(commit=False)
+            licao.user = request.user  # Define o usuário logado como autor da lição
+            licao.save()
+            messages.success(request, 'Lição cadastrada com sucesso!')
+            return redirect('home')  # Redireciona para a home
+    else:
+        form = LicaoForm()
+    
+    return render(request, 'cadastrarlicao.html', {'form': form})
 
 @login_required
-def visualizarlicao(request):
-    user = request.user
-    return render(request, 'visualizarlicao.html', {'user': user})
+def listar_todas_licoes(request):
+    licoes = Licao.objects.all()  # Busca todas as lições no banco de dados
+    return render(request, 'visualizarlicao.html', {'licoes': licoes})
 
 @login_required
 def editarlicao(request):

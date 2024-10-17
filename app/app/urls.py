@@ -23,7 +23,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from .views import index, register , user_login , home , sair , visualizarperfil, editarperfil , deletarperfil , cadastrarlicao , visualizarlicao, editarlicao , deletarlicao # Importando as views que você precisa
+from .views import index, register , user_login , home , sair , visualizarperfil, editarperfil , deletarperfil , cadastrarlicao , listar_todas_licoes, editarlicao , deletarlicao # Importando as views que você precisa
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # Rota para a interface de administração
@@ -36,9 +36,9 @@ urlpatterns = [
     path('editarperfil/', editarperfil, name='editarperfil'),  # Rota para editar o perfil
     path('deletarperfil/', deletarperfil, name='deletarperfil'),  # Rota para deletar o perfil
     path('cadastrarlicao/', cadastrarlicao, name='cadastrarlicao'),  # Rota para cadastrar uma lição
-    path('visualizarlicao/', visualizarlicao, name='visualizarlicao'),  # Rota para visualizar uma lição
-    path('editarlicao/', editarlicao, name='editarlicao'),  # Rota para editar uma lição
-    path('deletarlicao/', deletarlicao, name='deletarlicao'),  # Rota para deletar uma lição
+    path('licoes/', listar_todas_licoes, name='listar_todas_licoes'),
+    path('licao/<int:licao_id>/editar/', editarlicao, name='editarlicao'),
+    path('licao/<int:licao_id>/deletar/', deletarlicao, name='deletarlicao'),
     path('api/licao/', include('licao.urls')),  # Incluindo URLs do app 'licao'
     path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),  # API Schema
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='api-schema'), name='api-docs'),  # Swagger Docs

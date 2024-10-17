@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Nova Lição</title>
+</head>
+<body>
+    <h2>Cadastrar Nova Lição</h2>
+
+    <!-- Exibe mensagens de sucesso ou erro -->
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Formulário de Cadastro de Lição -->
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Renderiza o formulário automaticamente -->
+
+        <button type="submit">Salvar Lição</button>
+    </form>
+
+    <a href="{% url 'home' %}">Voltar</a> <!-- Link para cancelar -->
+</body>
+</html>

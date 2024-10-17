@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todas as Lições</title>
+</head>
+<body>
+    <h2>Todas as Lições Cadastradas</h2>
+
+    <!-- Verifica se há lições -->
+    {% if licoes %}
+        <ul>
+        <!-- Itera sobre todas as lições no sistema -->
+        {% for licao in licoes %}
+            <li>
+                <strong>Título:</strong> {{ licao.title }}<br>
+                <strong>Conteúdo:</strong> {{ licao.content }}<br>
+                <strong>Tempo Estimado:</strong> {{ licao.time_minutes }} minutos<br>
+                <strong>Preço:</strong> R$ {{ licao.price }}<br>
+                <strong>Link:</strong> {{ licao.link }}<br>
+                <hr>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Não há lições cadastradas no momento.</p>
+    {% endif %}
+
+    <a href="{% url 'cadastrarlicao' %}">Cadastrar Nova Lição</a> <!-- Link para cadastrar nova lição -->
+</body>
+</html>

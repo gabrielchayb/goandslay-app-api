@@ -1,5 +1,5 @@
 from django import forms
-from core.models import User
+from core.models import User , Licao
 from django.contrib.auth import authenticate , get_user_model
 
 class UserRegistrationForm(forms.ModelForm):
@@ -28,3 +28,10 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ['email', 'name', 'birth_date']
+
+
+
+class LicaoForm(forms.ModelForm):
+    class Meta:
+        model = Licao
+        fields = ['title', 'content', 'time_minutes', 'price', 'link']
