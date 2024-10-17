@@ -4,31 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todas as Lições Cadastradas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+        
+        /* Estilos globais */
+        body {
+            font-family: 'Orbitron', sans-serif;
+            font-optical-sizing: auto;
+            font-style: bold;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            gap: 1em;
+            background: rgb(15,13,13);
+            background: linear-gradient(180deg, rgba(15,13,13,1) 0%, rgba(26,26,26,1) 52%, rgba(0,0,0,1) 63%);
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 60%;
+            width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+
+        p, li {
+            font-size: 1.2em;
+            margin: 0.5em 0;
+        }
+
+        /* Estilos para os links */
+        a {
+            display: inline-block;
+            background-color: #ffab04;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-size: 1em;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        a:hover {
+            background-color: green;
+        }
+
+        /* Estilos para lista de lições */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+            text-align: left;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #ffab04;
+        }
+
+        @media (max-width: 600px) {
+            a {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            p, li {
+                font-size: 1em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>Todas as Lições Cadastradas</h2>
+    <div class="container">
+        <h2>Todas as Lições Cadastradas</h2>
 
-    <!-- Verifica se há lições -->
-    {% if licoes %}
-        <ul>
-        <!-- Itera sobre todas as lições no sistema -->
-        {% for licao in licoes %}
-            <li>
-                <strong>Título:</strong> {{ licao.title }}<br>
-                <strong>Conteúdo:</strong> {{ licao.content }}<br>
-                <strong>Tempo Estimado:</strong> {{ licao.time_minutes }} minutos<br>
-                <strong>Preço:</strong> R$ {{ licao.price }}<br>
-                <strong>Link:</strong> {{ licao.link }}<br>
-                <a href="{% url 'editar_licao' licao.id %}">Editar Lição</a> <!-- Link para editar a lição -->
-                <hr>
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>Não há lições cadastradas no momento.</p>
-    {% endif %}
+        <!-- Verifica se há lições -->
+        {% if licoes %}
+            <ul>
+                <!-- Itera sobre todas as lições no sistema -->
+                {% for licao in licoes %}
+                    <li>
+                        <strong>Título:</strong> {{ licao.title }}<br>
+                        <strong>Conteúdo:</strong> {{ licao.content }}<br>
+                        <strong>Tempo Estimado:</strong> {{ licao.time_minutes }} minutos<br>
+                        <strong>Preço:</strong> R$ {{ licao.price }}<br>
+                        <strong>Link:</strong> <a href="{{ licao.link }}" target="_blank">{{ licao.link }}</a><br>
+                        <a href="{% url 'editar_licao' licao.id %}">Editar Lição</a>
+                        <hr>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Não há lições cadastradas no momento.</p>
+        {% endif %}
 
-    <a href="{% url 'cadastrarlicao' %}">Cadastrar Nova Lição</a> <!-- Link para cadastrar nova lição -->
-    <a href="{% url 'home' %}">Voltar</a> <!-- Link para voltar à página inicial -->
+        <a href="{% url 'cadastrarlicao' %}">Cadastrar Nova Lição</a>
+        <a href="{% url 'home' %}">Voltar</a>
+    </div>
 </body>
 </html>
