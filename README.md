@@ -66,8 +66,8 @@ To test all APIs in SwaggerUI, follow this sequence:
 	•	POST /api/user/token/ (Log in with your user and receive your authorization token)
 At the top of the page, click “Authorize” and enter:
 
-tokenAuth 
-Token xxxxxxxxxxxxxxxxxxxxx
+	tokenAuth 
+	Token xxxxxxxxxxxxxxxxxxxxx
 
 
 	2.	User Details
@@ -83,18 +83,16 @@ For Evaluators
 
 Simply run:
 
-docker-compose up
+	docker-compose up
 
 For Developers
 
 Run the following commands as needed:
 
-docker-compose run --rm app sh -c "python manage.py runserver"
-docker-compose run --rm app sh -c "python manage.py makemigrations"
-docker-compose run --rm app sh -c "python manage.py createsuperuser"
-docker-compose run --rm app sh -c "python manage.py migrate"
-docker-compose run --rm app sh -c "python manage.py startapp licao"
-docker-compose up
-docker-compose down
-
-This refined documentation should provide a clear and professional overview of your project, making it easy for users and developers to understand and utilize your platform effectively.
+	docker-compose run --rm app sh -c "python manage.py runserver"
+	docker-compose run --rm app sh -c "python manage.py makemigrations"
+	docker-compose run --rm app sh -c "python manage.py createsuperuser"
+	docker-compose run --rm app sh -c "python manage.py migrate"
+	docker-compose run --rm app sh -c "python manage.py startapp licao"
+	docker-compose up
+	docker-compose down
