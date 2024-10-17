@@ -4,16 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+        
+        /* Estilos globais */
+        body {
+            font-family: 'Orbitron', sans-serif;
+            font-optical-sizing: auto;
+            font-style: bold;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            gap: 1em;
+            background: rgb(15,13,13);
+            background: linear-gradient(180deg, rgba(15,13,13,1) 0%, rgba(26,26,26,1) 52%, rgba(0,0,0,1) 63%);
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 60%;
+            width: 600px;
+            margin: 0 auto;
+            text-align: center; /* Centraliza o texto dentro da div */
+        }
+
+        #text {
+            font-size: 1.5em;
+            line-height: 2;
+        }
+
+        /* Estilos para o formulário */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centraliza os itens do formulário */
+        }
+
+        input {
+            padding: 10px;
+            margin-top: 0.5em;
+            width: 100%; /* Ajusta os campos de input para preencher a largura */
+            max-width: 400px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        /* Estilos para os botões */
+        .label {
+            background-color: #ffab04;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            gap: 1em;
+            border-radius: 5px;
+            font-size: 1em;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .label:hover {
+            background-color: green;
+        }
+
+        @media (max-width: 600px) {
+            .label {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* Estilos para mensagens de erro */
+        .error {
+            color: red;
+            margin-top: 1em;
+        }
+    </style>
 </head>
 <body>
-    <h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}  <!-- Renderiza o formulário -->
-        <button type="submit">Entrar</button>
-    </form>
-    {% if form.non_field_errors %}
-        <div class="error">{{ form.non_field_errors }}</div>
-    {% endif %}
+    <div class="container">
+        <h2 id="text">Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- Renderiza o formulário -->
+            <button type="submit" class="label">Entrar</button>
+        </form>
+
+        {% if form.non_field_errors %}
+            <div class="error">{{ form.non_field_errors }}</div>
+        {% endif %}
+    </div>
 </body>
 </html>
