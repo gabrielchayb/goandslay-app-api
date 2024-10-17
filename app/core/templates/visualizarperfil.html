@@ -4,21 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil do Usuário</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+        
+        /* Estilos globais */
+        body {
+            font-family: 'Orbitron', sans-serif;
+            font-optical-sizing: auto;
+            font-style: bold;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            gap: 1em;
+            background: rgb(15,13,13);
+            background: linear-gradient(180deg, rgba(15,13,13,1) 0%, rgba(26,26,26,1) 52%, rgba(0,0,0,1) 63%);
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 60%;
+            width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            line-height: 2;
+            color: #ffab04;
+            text-shadow: 2px 2px 4px rgba(3, 5, 10, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin: 0.5em 0;
+        }
+
+        /* Estilos para os links */
+        a {
+            display: inline-block;
+            background-color: #ffab04;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-size: 1em;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        a:hover {
+            background-color: green;
+        }
+
+        @media (max-width: 600px) {
+            a {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>Perfil do Usuário</h2>
-    
-    <!-- Exibe as informações do usuário logado -->
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p><strong>Nome:</strong> {{ user.name }}</p>
-    <p><strong>Data de Nascimento:</strong> {{ user.birth_date|date:"d/m/Y" }}</p>
-    <p><strong>Ativo:</strong> {{ user.is_active|yesno:"Sim,Não" }}</p>
-    
-
-    <a href="{% url 'sair' %}">Logout</a>
-    <a href="{% url 'editarperfil' %}">Editar Perfil</a>
-    <a href="{% url 'deletarperfil' %}">Excluir Perfil</a>
-    <a href=" {% url 'home' %}">Voltar</a>
-
+    <div class="container">
+        <h2>Perfil do Usuário</h2>
+        
+        <!-- Exibe as informações do usuário logado -->
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Nome:</strong> {{ user.name }}</p>
+        <p><strong>Data de Nascimento:</strong> {{ user.birth_date|date:"d/m/Y" }}</p>
+        <p><strong>Ativo:</strong> {{ user.is_active|yesno:"Sim,Não" }}</p>
+        
+        <a href="{% url 'sair' %}">Logout</a>
+        <a href="{% url 'editarperfil' %}">Editar Perfil</a>
+        <a href="{% url 'deletarperfil' %}">Excluir Perfil</a>
+        <a href="{% url 'home' %}">Voltar</a>
+    </div>
 </body>
 </html>

@@ -4,27 +4,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Nova Lição</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+        
+        /* Estilos globais */
+        body {
+            font-family: 'Orbitron', sans-serif;
+            font-optical-sizing: auto;
+            font-style: bold;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            gap: 1em;
+            background: rgb(15,13,13);
+            background: linear-gradient(180deg, rgba(15,13,13,1) 0%, rgba(26,26,26,1) 52%, rgba(0,0,0,1) 63%);
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 80%;
+            width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            line-height: 2;
+            color: #ffab04;
+            text-shadow: 2px 2px 4px rgba(3, 5, 10, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            color: red;
+            font-size: 1.2em;
+        }
+
+        form {
+            margin: 20px 0;
+        }
+
+        button {
+            display: inline-block;
+            background-color: #ffab04;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            transition: background-color 0.3s ease;
+            font-size: 1em;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: green;
+        }
+
+        a {
+            display: inline-block;
+            background-color: #ffab04;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-size: 1em;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        a:hover {
+            background-color: green;
+        }
+
+        @media (max-width: 600px) {
+            button, a {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            ul li {
+                font-size: 1em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>Cadastrar Nova Lição</h2>
+    <div class="container">
+        <h2>Cadastrar Nova Lição</h2>
 
-    <!-- Exibe mensagens de sucesso ou erro -->
-    {% if messages %}
-        <ul>
-        {% for message in messages %}
-            <li>{{ message }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
+        <!-- Exibe mensagens de sucesso ou erro -->
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
 
-    <!-- Formulário de Cadastro de Lição -->
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}  <!-- Renderiza o formulário automaticamente -->
+        <!-- Formulário de Cadastro de Lição -->
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- Renderiza o formulário automaticamente -->
 
-        <button type="submit">Salvar Lição</button>
-    </form>
+            <button type="submit">Salvar Lição</button>
+        </form>
 
-    <a href="{% url 'home' %}">Voltar</a> <!-- Link para cancelar -->
+        <a href="{% url 'home' %}">Voltar</a> <!-- Link para cancelar -->
+    </div>
 </body>
 </html>
