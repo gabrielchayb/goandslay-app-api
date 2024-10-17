@@ -3,34 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <title>Go And Slay - Registro</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+        
+        /* Estilos globais */
+        body {
+            font-family: 'Orbitron', sans-serif;
+            font-optical-sizing: auto;
+            font-style: bold;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            gap: 1em;
+            background: rgb(15,13,13);
+            background: linear-gradient(180deg, rgba(15,13,13,1) 0%, rgba(26,26,26,1) 52%, rgba(0,0,0,1) 63%);
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 60%;
+            width: 600px;
+            margin: 0 auto;
+            text-align: center; /* Centraliza o texto dentro da div */
+        }
+
+        #text {
+            font-size: 1.5em;
+            line-height: 2;
+            color: #ffab04;
+            text-shadow: 2px 2px 4px rgba(3, 5, 10, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Estilos para o formulário */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centraliza os itens do formulário */
+        }
+
+        label {
+            margin-top: 1em;
+        }
+
+        input {
+            padding: 10px;
+            margin-top: 0.5em;
+            width: 100%; /* Ajusta os campos de input para preencher a largura */
+            max-width: 400px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        /* Estilos para os botões e links */
+        .image-buttons {
+            display: inline-block;  
+            text-align: center;
+            margin: 1.5em;
+            cursor: pointer;
+        }
+
+        .label {
+            background-color: #ffab04;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            gap: 1em;
+            border-radius: 5px;
+            font-size: 1em;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: green;
+        }
+
+        @media (max-width: 600px) {
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>Cadastre-se</h2>
-    
-    {% if messages %}
-        {% for message in messages %}
-            <div>{{ message }}</div>
-        {% endfor %}
-    {% endif %}
+    <div class="container">
+        <h2 id="text">Cadastre-se</h2>
 
-    <form method="POST">
-        {% csrf_token %}
-        <label for="email">Email:</label>
-        <input type="email" name="email" required><br>
+        {% if messages %}
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
 
-        <label for="name">Nome:</label>
-        <input type="text" name="name" required><br>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="email">Email:</label>
+            <input type="email" name="email" required><br>
 
-        <label for="birth_date">Data de Nascimento:</label>
-        <input type="date" name="birth_date" required><br>
+            <label for="name">Nome:</label>
+            <input type="text" name="name" required><br>
 
-        <label for="password">Senha:</label>
-        <input type="password" name="password" required><br>
+            <label for="birth_date">Data de Nascimento:</label>
+            <input type="date" name="birth_date" required><br>
 
-        <button type="submit">Registrar</button>
-    </form>
+            <label for="password">Senha:</label>
+            <input type="password" name="password" required><br>
 
-    
+            <button type="submit" class="label btn">Registrar</button>
+        </form>
+    </div>
 </body>
 </html>
