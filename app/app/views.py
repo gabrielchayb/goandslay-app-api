@@ -1,7 +1,7 @@
 from core.models import User
 from django.shortcuts import render
 from core.models import User
-from .forms import UserRegistrationForm , UserLoginForm
+from .forms import UserRegistrationForm , UserLoginForm , UserEditForm
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
@@ -64,8 +64,16 @@ def visualizarperfil(request):
 
 @login_required
 def editarperfil(request):
-    user = request.user
-    return render(request, 'editarperfil.html', {'user': user})
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Seu perfil foi atualizado com sucesso!')
+            return redirect('visualizarperfil')  # Redireciona para o perfil do usuário
+    else:
+        form = UserEditForm(instance=request.user)
+    
+    return render(request, 'editarperfil.html', {'form': form})
 
 @login_required
 def deletarperfil(request):
