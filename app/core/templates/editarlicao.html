@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Lição</title>
+    <script>
+        // Função para exibir alerta de sucesso
+        function showSuccessMessage() {
+            alert("Lição atualizada com sucesso!");
+        }
+    </script>
+</head>
+<body>
+    <h2>Editar Lição</h2>
+
+    <!-- Renderiza o formulário de edição -->
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Renderiza os campos do formulário -->
+        <button type="submit">Salvar Alterações</button>
+    </form>
+
+    <!-- Verifica se houve uma mensagem de sucesso e exibe o alerta após o submit -->
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio do formulário para fins de demonstração
+            {% if messages %}
+                showSuccessMessage();
+            {% endif %}
+            this.submit(); // Envia o formulário após exibir a mensagem
+        });
+    </script>
+
+    <a href="{% url 'home' %}">Voltar</a>
+</body>
+</html>

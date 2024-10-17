@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todas as Lições</title>
+    <title>Todas as Lições Cadastradas</title>
 </head>
 <body>
     <h2>Todas as Lições Cadastradas</h2>
@@ -19,6 +19,7 @@
                 <strong>Tempo Estimado:</strong> {{ licao.time_minutes }} minutos<br>
                 <strong>Preço:</strong> R$ {{ licao.price }}<br>
                 <strong>Link:</strong> {{ licao.link }}<br>
+                <a href="{% url 'editar_licao' licao.id %}">Editar Lição</a> <!-- Link para editar a lição -->
                 <hr>
             </li>
         {% endfor %}
@@ -28,8 +29,6 @@
     {% endif %}
 
     <a href="{% url 'cadastrarlicao' %}">Cadastrar Nova Lição</a> <!-- Link para cadastrar nova lição -->
-    <a href="/editarlicao">Editar Lição</a> <!-- Link para editar lição -->
     <a href="{% url 'home' %}">Voltar</a> <!-- Link para voltar à página inicial -->
-    <a 
 </body>
 </html>

@@ -105,12 +105,22 @@ def listar_todas_licoes(request):
     return render(request, 'visualizarlicao.html', {'licoes': licoes})
 
 @login_required
-def editarlicao(request):
-    user = request.user
-    return render(request, 'editarlicao.html', {'user': user})
+def editar_licao(request, licao_id):
+    licao = get_object_or_404(Licao, id=licao_id, user=request.user)  # Verifica se a lição pertence ao usuário
+
+    if request.method == 'POST':
+        form = LicaoForm(request.POST, instance=licao)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Lição atualizada com sucesso!')
+            return redirect('listar_todas_licoes')  # Redireciona para a lista de todas as lições após a edição
+    else:
+        form = LicaoForm(instance=licao)
+
+    return render(request, 'editarlicao.html', {'form': form, 'licao': licao})
 
 @login_required
-def deletarlicao(request):
+def deletar_licao(request):
     user = request.user
     return render(request, 'deletarlicao.html', {'user': user})
 
