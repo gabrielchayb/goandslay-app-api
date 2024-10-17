@@ -1,79 +1,100 @@
-A english teaching plataform that allows clients to log in using token-based authentication to manage their lessons with titles, contents and much more. It is focused on developing, documenting, and maintaining scalable and secure RESTful APIs, built using Django and PostgreSQL. The project uses Docker to facilitate containerization and deployment, and Django REST Framework (DRF) to create a robust RESTful API for recipe management.
+English Teaching Platform
 
-PS: the documentation of all RESTApis is on /api/docs, with SwaggerUI responsible for:
-	•	Listing all endpoints 
-	•	Simulating real API requisitions from web, with curl.
-	•	Simulating manual token auth with Django Token Auth
-	•	Full Documentation of all APIs in the system, including responses, HTTP methods and token authentications.
+An English teaching platform that enables clients to log in using token-based authentication to manage their lessons, including titles, content, and more. The project focuses on developing, documenting, and maintaining scalable and secure RESTful APIs, built with Django and PostgreSQL. It utilizes Docker for containerization and deployment, and Django REST Framework (DRF) to create a robust RESTful API for recipe management.
 
-Description of the app:
+Table of Contents
 
-	•	CRUD Operations: Create, read, update, and delete users.
-	•	CRUD Operations: Create, read, update, and delete lessons, identified by id.
-	•	Plus Lessons: Explore every user lesson with: title, content, time in minutes for reading the lesson, price and the link.
-	•	Authentication: Secure user authentication using Django’s integrated token system.
+	•	Overview
+	•	API Documentation
+	•	Features
+	•	Tech Stack
+	•	Installation
+	•	Usage
+	•	Docker Commands
+
+Overview
+
+This platform provides a comprehensive environment for managing English lessons, facilitating CRUD operations for users and lessons while ensuring secure authentication through Django’s integrated token system.
+
+API Documentation
+
+All REST APIs are documented at /api/docs, with SwaggerUI providing:
+
+	•	Listing of all endpoints
+	•	Simulation of real API requests from the web, with curl
+	•	Manual token authentication with Django Token Auth
+	•	Full documentation of all APIs in the system, including responses, HTTP methods, and token authentication
+
+Features
+
+	•	CRUD Operations for Users: Create, read, update, and delete user accounts.
+	•	CRUD Operations for Lessons: Create, read, update, and delete lessons, identified by ID.
+	•	Lesson Management: Explore every user lesson with details such as title, content, reading time in minutes, price, and link.
+	•	Secure Authentication: User authentication using Django’s integrated token system.
 	•	PostgreSQL Database: Efficient storage and management of relational data.
 	•	Docker: Containerized environment for easy setup and deployment.
 
-Tech Stack:
+Tech Stack
 
 	•	Django: Backend framework for Python.
 	•	Django REST Framework: REST API framework for Django.
 	•	PostgreSQL: Relational database management system.
 	•	Docker: Containerization for development and production.
-	•	GitHub Actions: Maintenance of pipelines, CI/CD for production.
-	•	SwaggerUI: Complete documentation of the RESTful APIs, including endpoints, authenticated testing, requests, schemas, etc. Available at localhost/api/docs.
+	•	GitHub Actions: Maintenance of pipelines and CI/CD for production.
+	•	SwaggerUI: Complete documentation of the RESTful APIs, including endpoints, authenticated testing, requests, schemas, etc., available at http://localhost/api/docs.
 
-Instalação:
+Installation
 
-	1.	Clone este repositório.
-	(INSTALE O DOCKER DESKTOP EM SUA MAQUINA, NESTE LINK: https://www.docker.com/products/docker-desktop/)
-	Faça o login / crie uma conta e continue o tutorial: 
-	2.	Configure a sua imagem do Docker (ligue o docker desktop localmente e clique em "Images"). Automaticamente ele vai buscar por imagens na sua maquina.
-	3.	Depois de clonar o repositorio para seu editor de codigo favorito, digite: docker-compose up (ele ja vai instalar tudo pois foi configurado no Dockerfile, mas como é muita coisa, geralmente demora de 180 a 300 segundos. Seja paciente!)
- 	4.	Consulte e teste a documentação das APIs em: http://127.0.0.1:8000/api/docs/
-  	5.  Não se esqueça de autenticar seu user: em apis user, /api/user/token/ , faça login, copie e cole o token gerado, e em cima da page, clique em "Authorize", clique em tokenAuth, e digite no campo, desse jeito: Token xxxxxxxxxxxxxxxxxxxxx 
+	1.	Clone this repository.
+	2.	Install Docker Desktop on your machine from the following link: Docker Desktop. Log in/create an account and follow the tutorial.
+	3.	Configure your Docker image (start Docker Desktop locally and click on “Images”). It will automatically search for images on your machine.
+	4.	After cloning the repository to your preferred code editor, run the following command:
 
-OBS: para testar todas as apis no SwaggerUI, siga essa ordem: 
+docker-compose up
 
-1. user
+(This command will install everything as configured in the Dockerfile. It may take between 180 to 300 seconds. Please be patient!)
 
-POST
-​/api​/user​/create​/ (crie seu usuario)
+	5.	Access and test the API documentation at: API Docs
+	6.	Authenticate your user by navigating to /api/user/token/, logging in, copying the generated token, and clicking “Authorize” at the top of the page. Enter the token in the following format: Token xxxxxxxxxxxxxxxxxxxxx.
 
-POST
-​/api​/user​/token​/ (faça login com seu usuario e receba seu token de autorização)
+Usage
 
-No inicio da pagina, clique em Authorize 
+To test all APIs in SwaggerUI, follow this sequence:
+
+	1.	User
+	•	POST /api/user/create/ (Create your user)
+	•	POST /api/user/token/ (Log in with your user and receive your authorization token)
+At the top of the page, click “Authorize” and enter:
+
 tokenAuth 
 Token xxxxxxxxxxxxxxxxxxxxx
 
-2. user 
 
-GET 
+	2.	User Details
+	•	GET /api/user/me/ (Check if your user has been authenticated successfully; your login information will be returned)
+	•	Test PATCH, PUT, DELETE requests freely.
+	3.	Lesson
+	•	POST /api/licao/licao (Insert a lesson)
+	•	Test GET, PUT, PATCH, GET BY ID, DELETE requests freely.
 
-​/api​/user​/me​/ (teste se o seu usuario foi autenticado com sucesso, se sim, suas informações de login irão ser retornadas)
+Docker Commands
 
-PATCH, PUT, DELETE (fique a vontade para testar essas requisições)
+For Evaluators
 
-3. licao 
+Simply run:
 
-POST 
+docker-compose up
 
-/api/licao/licao (insira uma licao)
+For Developers
 
-GET, PUT, PATCH, GET BY ID, DELETE (fique a vontade para testar essas requisições)
+Run the following commands as needed:
 
-
-COMANDOS PARA RODAR DOCKER
-
-PARA AVALIADORES: precisa apenas rodar docker-compose up
-
-PARA MIM: 
-docker-compose run --rm app sh -c "python manage.py runserver" 
+docker-compose run --rm app sh -c "python manage.py runserver"
 docker-compose run --rm app sh -c "python manage.py makemigrations"
 docker-compose run --rm app sh -c "python manage.py createsuperuser"
 docker-compose run --rm app sh -c "python manage.py migrate"
 docker-compose run --rm app sh -c "python manage.py startapp licao"
 docker-compose up
-docker-compose down 
+docker-compose down
+
+This refined documentation should provide a clear and professional overview of your project, making it easy for users and developers to understand and utilize your platform effectively.
