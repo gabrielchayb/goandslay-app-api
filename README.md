@@ -94,5 +94,7 @@ Run the following commands as needed:
 	docker-compose run --rm app sh -c "python manage.py createsuperuser"
 	docker-compose run --rm app sh -c "python manage.py migrate"
 	docker-compose run --rm app sh -c "python manage.py startapp licao"
+	docker-compose -f docker-compose-deploy.yml down
+	docker-compose -f docker-compose-deploy.yml up  
 	docker-compose up
 	docker-compose down
