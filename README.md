@@ -71,6 +71,7 @@ PARA AVALIADORES: precisa apenas rodar docker-compose up
 PARA MIM: 
 docker-compose run --rm app sh -c "python manage.py runserver" 
 docker-compose run --rm app sh -c "python manage.py makemigrations"
+docker-compose run --rm app sh -c "python manage.py createsuperuser"
 docker-compose run --rm app sh -c "python manage.py migrate"
 docker-compose run --rm app sh -c "python manage.py startapp licao"
 docker-compose up
