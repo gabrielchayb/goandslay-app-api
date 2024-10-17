@@ -43,6 +43,30 @@
             letter-spacing: 0.1em;
         }
 
+                /* Estilizando o botão de deletar */
+        button[type="submit"] {
+            background-color: #ff4d4d;  /* Cor de fundo vermelho claro */
+            font-family: 'Orbitron', sans-serif;
+            color: white;  /* Cor do texto branca */
+            border: none;  /* Remover borda */
+            padding: 10px 20px;  /* Espaçamento interno */
+            font-size: 1em;  /* Tamanho da fonte */
+            border-radius: 5px;  /* Borda arredondada */
+            cursor: pointer;  /* Mudar o cursor ao passar sobre o botão */
+            transition: background-color 0.3s ease;  /* Efeito suave na mudança de cor */
+        }
+
+        /* Estilo ao passar o mouse sobre o botão */
+        button[type="submit"]:hover {
+            background-color: #e60000;  /* Cor mais escura ao passar o mouse */
+        }
+
+        /* Estilo ao clicar no botão */
+        button[type="submit"]:active {
+            background-color: #cc0000;  /* Cor mais escura ao clicar */
+            transform: scale(0.98);  /* Efeito de clique */
+        }
+
         p, li {
             font-size: 1.2em;
             margin: 0.5em 0;
@@ -89,11 +113,11 @@
             }
 
             h2 {
-                font-size: 1.5em;
+                font-size: 1em;
             }
 
             p, li {
-                font-size: 1em;
+                font-size: 0.7em;
             }
         }
     </style>
@@ -114,6 +138,10 @@
                         <strong>Preço:</strong> R$ {{ licao.price }}<br>
                         <strong>Link:</strong> <a href="{{ licao.link }}" target="_blank">{{ licao.link }}</a><br>
                         <a href="{% url 'editar_licao' licao.id %}">Editar Lição</a>
+                        <form method="POST" action="{% url 'deletar_licao' licao.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Deletar</button>
+                        </form>
                         <hr>
                     </li>
                 {% endfor %}

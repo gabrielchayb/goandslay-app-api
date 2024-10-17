@@ -119,8 +119,16 @@ def editar_licao(request, licao_id):
 
     return render(request, 'editarlicao.html', {'form': form, 'licao': licao})
 
+
 @login_required
-def deletar_licao(request):
-    user = request.user
-    return render(request, 'deletarlicao.html', {'user': user})
+def deletar_licao(request, licao_id):
+    licao = get_object_or_404(Licao, id=licao_id, user=request.user)  # Verifica se a lição pertence ao usuário
+
+    if request.method == 'POST':
+        licao.delete()
+        messages.success(request, 'Lição deletada com sucesso!')
+        return redirect('home')  # Redireciona diretamente para a página "home"
+
+    # Redireciona de volta para "home" se a requisição não for POST
+    return redirect('home')
 
