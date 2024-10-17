@@ -23,7 +23,9 @@ App Structure
 	2.	Make sure models and migrations are defined for the project.
 	3.	Run the migrate command to apply the migrations.
 	•	models.py: Each class in models.py represents a database table, and the class attributes map to the columns in that table.
-
+	•	templates - pasta where our html files are;
+	•	tests: some tests that I created to validated my functions
+	
 // licao (lesson)
 
 	•	serializers.py: The purpose of this file is to convert the lesson-related model data into formats suitable for API requests and responses.

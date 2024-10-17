@@ -1,19 +1,3 @@
-"""app URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularSwaggerView,
@@ -23,7 +7,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from .views import index, register , user_login , home , sair , visualizarperfil, editarperfil , deletarperfil , cadastrarlicao , listar_todas_licoes, editar_licao , deletar_licao # Importando as views que você precisa
+from .views import index, register , user_login , home , sair , visualizarperfil, editarperfil , deletarperfil , cadastrarlicao , listar_todas_licoes, editar_licao , deletar_licao
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # Rota para a interface de administração
@@ -36,16 +20,15 @@ urlpatterns = [
     path('editarperfil/', editarperfil, name='editarperfil'),  # Rota para editar o perfil
     path('deletarperfil/', deletarperfil, name='deletarperfil'),  # Rota para deletar o perfil
     path('cadastrarlicao/', cadastrarlicao, name='cadastrarlicao'),  # Rota para cadastrar uma lição
-    path('licoes/', listar_todas_licoes, name='listar_todas_licoes'),
-    path('licao/<int:licao_id>/editar/', editar_licao, name='editar_licao'),
-    path('licao/<int:licao_id>/deletar/', deletar_licao, name='deletar_licao'),
+    path('licoes/', listar_todas_licoes, name='listar_todas_licoes'), # Rota para listar todas as lições de todos os usuarios
+    path('licao/<int:licao_id>/editar/', editar_licao, name='editar_licao'), # Rota para editar uma lição SUA
+    path('licao/<int:licao_id>/deletar/', deletar_licao, name='deletar_licao'), # Rota para deletar uma lição SUA
     path('api/licao/', include('licao.urls')),  # Incluindo URLs do app 'licao'
-    path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),  # API Schema
+    path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),  # API Schema documentation
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='api-schema'), name='api-docs'),  # Swagger Docs
     path('api/user/', include('user.urls')),  # Incluindo URLs do app 'user'
 ]
 
-# Serve arquivos de mídia durante o desenvolvimento
 if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL,

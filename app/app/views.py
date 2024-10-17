@@ -20,13 +20,13 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Registro bem-sucedido! Você pode agora fazer login.')
-            return redirect('user_login')  # Altere 'login' para o nome da URL de login
+            return redirect('user_login')  
     else:
         form = UserRegistrationForm()
     
     return render(request, 'register.html', {'form': form})
 
-def user_login(request):  # Renomeie a função para evitar conflito
+def user_login(request):  
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
         
@@ -34,30 +34,30 @@ def user_login(request):  # Renomeie a função para evitar conflito
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             
-            # Tenta autenticar o usuário
+            
             user = authenticate(request, email=email, password=password)
             
             if user is not None:
-                auth_login(request, user)  # Usa a função de login correta
-                return redirect('home')  # Redireciona para a página inicial
+                auth_login(request, user)  
+                return redirect('home')  
             else:
                 messages.error(request, "Credenciais inválidas. Tente novamente.")
     
     else:
-        form = UserLoginForm()  # Cria uma nova instância do formulário
+        form = UserLoginForm()  # se der errado, cria um nova instancia do UserLoginForm
     
     return render(request, 'user_login.html', {'form': form})
 
 
-@login_required  # Garantir que o usuário esteja autenticado
+@login_required  
 def home(request):
     user = request.user  # Obtém o usuário logado
-    return render(request, 'home.html', {'user': user})  # Passa o usuário para o template
+    return render(request, 'home.html', {'user': user}) 
 
 @login_required
 def sair(request):
     logout(request)
-    return HttpResponseRedirect('/user_login') #até aqui OK, tudo funcionando
+    return HttpResponseRedirect('/user_login')
 
 @login_required
 def visualizarperfil(request):
@@ -71,7 +71,7 @@ def editarperfil(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Seu perfil foi atualizado com sucesso!')
-            return redirect('visualizarperfil')  # Redireciona para o perfil do usuário
+            return redirect('visualizarperfil')  
     else:
         form = UserEditForm(instance=request.user)
     
@@ -90,10 +90,10 @@ def cadastrarlicao(request):
         form = LicaoForm(request.POST)
         if form.is_valid():
             licao = form.save(commit=False)
-            licao.user = request.user  # Define o usuário logado como autor da lição
+            licao.user = request.user  # define o usuario LOGADO como o DONO da LICAO
             licao.save()
             messages.success(request, 'Lição cadastrada com sucesso!')
-            return redirect('home')  # Redireciona para a home
+            return redirect('home')  
     else:
         form = LicaoForm()
     
@@ -113,7 +113,7 @@ def editar_licao(request, licao_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Lição atualizada com sucesso!')
-            return redirect('listar_todas_licoes')  # Redireciona para a lista de todas as lições após a edição
+            return redirect('listar_todas_licoes')  
     else:
         form = LicaoForm(instance=licao)
 
@@ -122,13 +122,12 @@ def editar_licao(request, licao_id):
 
 @login_required
 def deletar_licao(request, licao_id):
-    licao = get_object_or_404(Licao, id=licao_id, user=request.user)  # Verifica se a lição pertence ao usuário
-
+    licao = get_object_or_404(Licao, id=licao_id, user=request.user)  
     if request.method == 'POST':
         licao.delete()
         messages.success(request, 'Lição deletada com sucesso!')
-        return redirect('home')  # Redireciona diretamente para a página "home"
+        return redirect('home')  
 
-    # Redireciona de volta para "home" se a requisição não for POST
+    
     return redirect('home')
 

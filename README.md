@@ -3,6 +3,7 @@ A english teaching plataform that allows clients to log in using token-based aut
 PS: the documentation of all RESTApis is on /api/docs, with SwaggerUI responsible for:
 	•	Listing all endpoints 
 	•	Simulating real API requisitions from web, with curl.
+	•	Simulating manual token auth with Django Token Auth
 	•	Full Documentation of all APIs in the system, including responses, HTTP methods and token authentications.
 
 Description of the app:
