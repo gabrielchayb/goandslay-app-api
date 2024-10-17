@@ -23,7 +23,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from .views import index, register , user_login , home , sair , visualizarperfil, editarperfil , deletarperfil , cadastrarlicao , editarlicao , deletarlicao # Importando as views que você precisa
+from .views import index, register , user_login , home , sair , visualizarperfil, editarperfil , deletarperfil , cadastrarlicao , visualizarlicao, editarlicao , deletarlicao # Importando as views que você precisa
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # Rota para a interface de administração
@@ -36,6 +36,7 @@ urlpatterns = [
     path('editarperfil/', editarperfil, name='editarperfil'),  # Rota para editar o perfil
     path('deletarperfil/', deletarperfil, name='deletarperfil'),  # Rota para deletar o perfil
     path('cadastrarlicao/', cadastrarlicao, name='cadastrarlicao'),  # Rota para cadastrar uma lição
+    path('visualizarlicao/', visualizarlicao, name='visualizarlicao'),  # Rota para visualizar uma lição
     path('editarlicao/', editarlicao, name='editarlicao'),  # Rota para editar uma lição
     path('deletarlicao/', deletarlicao, name='deletarlicao'),  # Rota para deletar uma lição
     path('api/licao/', include('licao.urls')),  # Incluindo URLs do app 'licao'

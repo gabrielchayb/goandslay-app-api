@@ -80,6 +80,11 @@ def cadastrarlicao(request):
     return render(request, 'cadastrarlicao.html', {'user': user})
 
 @login_required
+def visualizarlicao(request):
+    user = request.user
+    return render(request, 'visualizarlicao.html', {'user': user})
+
+@login_required
 def editarlicao(request):
     user = request.user
     return render(request, 'editarlicao.html', {'user': user})
