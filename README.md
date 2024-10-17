@@ -1,5 +1,24 @@
 English Teaching Platform
 
+INSTALLATION !!!
+
+	1.	Clone this repository in your local machine.
+	2.	Install Docker Desktop on your machine from the following link: https://www.docker.com/products/docker-desktop/. Log in/create an account and follow the tutorial.
+	3.	Configure your Docker image (start Docker Desktop locally and click on “Images”). It will automatically search for images on your machine. Just keep sure Docker Desktop in on in your machine, based on Docker Icon.
+	4.	After cloning the repository to your preferred code editor, run the following command:
+
+docker-compose up
+
+(This command will install everything as configured in the Dockerfile. It may take between 180 to 300 seconds. Please be patient!) 
+After the command finished, go to: http://127.0.0.1:8000/ in your favorite browser and should be ready to go. 
+
+	5.	Access and test the API documentation at: API Docs
+	6.	Authenticate your user by navigating to /api/user/token/, logging in, copying the generated token, and clicking “Authorize” at the top of the page. Enter the token in the following format: Token xxxxxxxxxxxxxxxxxxxxx.
+
+OBSERVATION: the file DOC.md conteins all the pasta and files explanation, and the .pdf is the system description that includes the class diagram, all functions, methods, variables, models and some explaining about the diferencials that my app have. 
+
+What is the project?
+
 An English teaching platform that enables clients to log in using token-based authentication to manage their lessons, including titles, content, and more. The project focuses on developing, documenting, and maintaining scalable and secure RESTful APIs, built with Django and PostgreSQL. It utilizes Docker for containerization and deployment, and Django REST Framework (DRF) to create a robust RESTful API for recipe management.
 
 Table of Contents
@@ -8,7 +27,6 @@ Table of Contents
 	•	API Documentation
 	•	Features
 	•	Tech Stack
-	•	Installation
 	•	Usage
 	•	Docker Commands
 
@@ -43,20 +61,6 @@ Tech Stack
 	•	GitHub Actions: Maintenance of pipelines and CI/CD for production.
 	•	SwaggerUI: Complete documentation of the RESTful APIs, including endpoints, authenticated testing, requests, schemas, etc., available at http://localhost/api/docs.
 
-Installation
-
-	1.	Clone this repository.
-	2.	Install Docker Desktop on your machine from the following link: Docker Desktop. Log in/create an account and follow the tutorial.
-	3.	Configure your Docker image (start Docker Desktop locally and click on “Images”). It will automatically search for images on your machine.
-	4.	After cloning the repository to your preferred code editor, run the following command:
-
-docker-compose up
-
-(This command will install everything as configured in the Dockerfile. It may take between 180 to 300 seconds. Please be patient!)
-
-	5.	Access and test the API documentation at: API Docs
-	6.	Authenticate your user by navigating to /api/user/token/, logging in, copying the generated token, and clicking “Authorize” at the top of the page. Enter the token in the following format: Token xxxxxxxxxxxxxxxxxxxxx.
-
 Usage
 
 To test all APIs in SwaggerUI, follow this sequence:
@@ -84,6 +88,8 @@ For Evaluators
 Simply run:
 
 	docker-compose up
+
+If you want to kill, just type CTRL + C in the terminal.
 
 For Developers
 
