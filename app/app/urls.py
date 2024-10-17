@@ -23,7 +23,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from .views import index, register , user_login , home , sair # Importando as views que você precisa
+from .views import index, register , user_login , home , sair , visualizarperfil, editarperfil , deletarperfil , cadastrarlicao , editarlicao , deletarlicao # Importando as views que você precisa
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # Rota para a interface de administração
@@ -32,6 +32,12 @@ urlpatterns = [
     path('user_login/', user_login, name='user_login'),  # Rota para o login
     path('home/', home, name='home'),  # Rota para a home
     path('sair/', sair, name='sair'),  # Rota para o logout
+    path('visualizarperfil/', visualizarperfil, name='visualizarperfil'),  # Rota para visualizar o perfil
+    path('editarperfil/', editarperfil, name='editarperfil'),  # Rota para editar o perfil
+    path('deletarperfil/', deletarperfil, name='deletarperfil'),  # Rota para deletar o perfil
+    path('cadastrarlicao/', cadastrarlicao, name='cadastrarlicao'),  # Rota para cadastrar uma lição
+    path('editarlicao/', editarlicao, name='editarlicao'),  # Rota para editar uma lição
+    path('deletarlicao/', deletarlicao, name='deletarlicao'),  # Rota para deletar uma lição
     path('api/licao/', include('licao.urls')),  # Incluindo URLs do app 'licao'
     path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),  # API Schema
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='api-schema'), name='api-docs'),  # Swagger Docs

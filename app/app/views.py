@@ -56,3 +56,36 @@ def home(request):
 def sair(request):
     logout(request)
     return HttpResponseRedirect('/user_login')
+
+@login_required
+def visualizarperfil(request):
+    user = request.user
+    return render(request, 'visualizarperfil.html', {'user': user})
+
+@login_required
+def editarperfil(request):
+    user = request.user
+    return render(request, 'editarperfil.html', {'user': user})
+
+@login_required
+def deletarperfil(request):
+    user = request.user
+    user.delete()
+    messages.success(request, 'Sua conta foi deletada com sucesso.')
+    return redirect('index')
+
+@login_required
+def cadastrarlicao(request):
+    user = request.user
+    return render(request, 'cadastrarlicao.html', {'user': user})
+
+@login_required
+def editarlicao(request):
+    user = request.user
+    return render(request, 'editarlicao.html', {'user': user})
+
+@login_required
+def deletarlicao(request):
+    user = request.user
+    return render(request, 'deletarlicao.html', {'user': user})
+
