@@ -68,6 +68,9 @@
                 padding: 10px 20px;     /* Ajuste do preenchimento em telas menores */
                 font-size: 0.9em;        /* Tamanho da fonte reduzido */
             }
+            #text {
+                font-size: 0.7em;
+            }
         }
 
          /* Definindo a animação fade-in */
@@ -97,7 +100,9 @@
     <a href="{% url 'register' %}" class="image-buttons">
         <button class="btn btn-primary">Cadastre-se Agora</button>
     </a>
-
+    <a href="{% url 'api-docs' %}" class="image-buttons">
+        <button class="btn btn-primary">Ir para a Documentação</button>
+    </a>
     <script>
         var text = document.getElementById('text')
         var TypeWriter = new Typewriter(text, {
