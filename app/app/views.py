@@ -55,12 +55,12 @@ def home(request):
 @login_required
 def sair(request):
     logout(request)
-    return HttpResponseRedirect('/user_login')
+    return HttpResponseRedirect('/user_login') #até aqui OK, tudo funcionando
 
 @login_required
 def visualizarperfil(request):
     user = request.user
-    return render(request, 'visualizarperfil.html', {'user': user})
+    return render(request, 'visualizarperfil.html', {'user': user}) 
 
 @login_required
 def editarperfil(request):
